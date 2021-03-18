@@ -135,7 +135,7 @@ extension HabitsViewController: UICollectionViewDelegateFlowLayout {
             headerCell.progress = HabitsStore.shared.todayProgress
         } else {
             guard let habitCell = cell as? HabitsCollectionViewCell else { return }
-            habitCell.habits = HabitsStore.shared.habits[indexPath.row]
+            habitCell.habit = HabitsStore.shared.habits[indexPath.row]
         }
     }
     

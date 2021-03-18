@@ -9,13 +9,16 @@ import UIKit
 
 class HabitsCollectionViewCell: UICollectionViewCell {
     
-    var habits: Habit? {
+    var count: Int = 0
+    
+    var habit: Habit? {
         didSet {
-            titleLabel.text = habits?.name
-            titleLabel.textColor = habits?.color
-            timeLabel.text = habits?.dateString
-            if habits!.isAlreadyTakenToday {
-                colorCircle.backgroundColor = habits?.color
+            titleLabel.text = habit?.name
+            titleLabel.textColor = habit?.color
+            timeLabel.text = habit?.dateString
+            inARowLabel.text = "Подряд: \(habit!.trackDates.count)"
+            if habit!.isAlreadyTakenToday {
+                colorCircle.backgroundColor = habit?.color
                 colorCircleImage.image = UIImage(systemName: "checkmark")
                 colorCircleImage.tintColor = .white
                 colorCircle.layer.borderWidth = 0
@@ -25,7 +28,7 @@ class HabitsCollectionViewCell: UICollectionViewCell {
                 colorCircleImage.backgroundColor = .none
                 colorCircle.layer.borderWidth = 1
                 colorCircle.backgroundColor = .white
-                colorCircle.layer.borderColor = habits?.color.cgColor
+                colorCircle.layer.borderColor = habit?.color.cgColor
             }
         }
     }
@@ -40,7 +43,16 @@ class HabitsCollectionViewCell: UICollectionViewCell {
     
     private let timeLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+        label.numberOfLines = 1
+        label.textColor = .systemGray
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let inARowLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
         label.numberOfLines = 1
         label.textColor = .systemGray
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -78,6 +90,7 @@ class HabitsCollectionViewCell: UICollectionViewCell {
     private func setupViews() {
         contentView.addSubview(titleLabel)
         contentView.addSubview(timeLabel)
+        contentView.addSubview(inARowLabel)
         contentView.addSubview(colorCircle)
         contentView.addSubview(colorCircleImage)
         
@@ -87,6 +100,9 @@ class HabitsCollectionViewCell: UICollectionViewCell {
             
             timeLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4),
             timeLabel.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            
+            inARowLabel.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            inARowLabel.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             
             colorCircle.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 47),
             colorCircle.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -26),

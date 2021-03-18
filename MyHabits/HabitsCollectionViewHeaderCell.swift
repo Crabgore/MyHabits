@@ -11,7 +11,8 @@ class HabitsCollectionViewHeaderCell: UICollectionViewCell {
     
     var progress: Float? {
         didSet {
-            progressLabel.text = "\(String(format:"%.1f", progress!))%"
+            let done = progress! * 100
+            progressLabel.text = "\(String(format:"%.0f", done))%"
             progressView.setProgress(progress ?? 0, animated: false)
         }
     }
