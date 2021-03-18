@@ -169,7 +169,7 @@ class HabitViewController: UIViewController {
         
         if habit != nil {
             view.addSubview(deleteHabbitButton)
-            constraints.append(deleteHabbitButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor))
+            constraints.append(deleteHabbitButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -22))
             constraints.append(deleteHabbitButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor))
             constraints.append(deleteHabbitButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor))
         }

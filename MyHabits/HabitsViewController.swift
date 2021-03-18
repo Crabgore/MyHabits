@@ -78,6 +78,7 @@ class HabitsViewController: UIViewController, RefreshDataDelegate {
                 cell.colorCircleImage.image = UIImage(systemName: "checkmark")
                 cell.colorCircleImage.tintColor = .white
                 HabitsStore.shared.track(habit)
+                collectionView.reloadData()
             }
         }
     }
